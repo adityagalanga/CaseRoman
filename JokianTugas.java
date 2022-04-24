@@ -24,11 +24,11 @@ class Main {
 
         //masukin 2 input kedalam 1 string
         AllChar = AddTwoString(InputOne,InputTwo);
-        System.out.println("Sebelum 1 : "+ AllChar);
+        System.out.println("Add two String : "+ AllChar);
 
         //Sorting comparator sesuai data
         AllChar = SortComparator(AllChar);
-        System.out.println("Sebelum 2 : "+ AllChar);
+        System.out.println("Sort Data : "+ AllChar);
 
         //convert dulu ke number simplify
         AllChar = ConvertNumber(AllChar);
@@ -83,7 +83,7 @@ class Main {
                 else
                 {
                     //check simplify sesuai hasil sekarang
-                    TempHasil = CalculateNumberRoman(TempHasil, currentScore, maxLength);
+                    TempHasil = CalculateSimplifyNumber(TempHasil, currentScore, maxLength);
 
                     //check apakah temp yang baru itu beda ga sama yang sekarang , misal CCCC berubah jadi D, nah si D ini sama ga sama yg sekarang kalau sama, berarti tinggal tambahin
                     if(TempHasil.charAt(0) == currentText[x])
@@ -106,7 +106,7 @@ class Main {
                 // ini misalnya kalau hasil terakhir, langsung check aja lagi
                 if(x == 0)
                 {
-                    TempHasil = CalculateNumberRoman(TempHasil, currentScore, maxLength);
+                    TempHasil = CalculateSimplifyNumber(TempHasil, currentScore, maxLength);
                     HasilHitungan = TempHasil + HasilHitungan;
                 }
             }
@@ -150,7 +150,7 @@ class Main {
     }
 
     // ini buat calculate simplify number
-    public static String CalculateNumberRoman(String curData, int score,int length)
+    public static String CalculateSimplifyNumber(String curData, int score,int length)
     {
         // ini hitung kemampuan sampai mana simplify berjalan
         int MaxScore=0;
