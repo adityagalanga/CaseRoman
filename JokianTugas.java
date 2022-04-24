@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-class JokianTugas {
+class Main {
 
     public static void main(String[] args) {
         // ini buat handle data
