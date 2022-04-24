@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 class Main {
 
+    // buat simpen data hasil simplify
+    public static String HasilHitungan= "";
+
     public static void main(String[] args) {
         // ini buat handle data
         String InputOne, InputTwo,AllChar;
@@ -54,8 +57,6 @@ class Main {
 
         // buat simpen data simplify sementara
         String TempHasil="";
-        // buat simpen data hasil simplify
-        String HasilHitungan= "";
 
         //loop dari belakang
         for(int x = currentText.length-1 ;x >= 0 ; x-- )
@@ -146,35 +147,51 @@ class Main {
 
         return 0;
     }
+    
     // ini buat calculate simplify number
-    public static String CalculateNumberRoman(String curChar, int score,int length)
+    public static String CalculateNumberRoman(String curData, int score,int length)
     {
-        // ini baut check number simplify
-        int cur = CheckNumberSimplify(score,length);
-        if(cur == 0 || cur == score)
+        //normalize length yang habis dibagi 5
+        int normalizeNum = length >=5 ? length % 5 : 0;
+        int currentLength = length - normalizeNum;
+        String moreResult = "";
+        if(normalizeNum != 0)
+        {
+            //ambil sisanya yang gabakal dihitung
+            moreResult = curData.substring(length-normalizeNum,length);
+        }
+        // ini buat check number simplify
+        int currentDataScore = CheckNumberSimplify(score,currentLength);
+
+        if(currentDataScore == score)
         {
             // kalau misalnya hasilnya sama setelah di simplify berarti tinggal balikin lagi yg awal
-            return curChar;
+            return curData;
         }
-        if(cur == 5){
+        //masukin sisanya ke hasil hitungan
+        HasilHitungan = moreResult + HasilHitungan;
+        if(currentDataScore == 1){
+            return "I";
+        }
+        if(currentDataScore == 5){
             return "V";
         }
-        if(cur == 10){
+        if(currentDataScore == 10){
             return "X";
         }
-        if(cur == 50){
+        if(currentDataScore == 50){
             return "L";
         }
-        if(cur == 100){
+        if(currentDataScore == 100){
             return "C";
         }
-        if(cur == 500){
+        if(currentDataScore == 500){
             return "D";
         }
-        if(cur == 1000){
+        if(currentDataScore == 1000){
             return "M";
         }
-        return curChar;
+        return curData;
     }
     // ini buat check simplify numbernya, check apakah hasilnya ketika di mod number roman itu bakal sama ga, kalau sama tinggal check aja
     public static int CheckNumberSimplify(int score,int length)
@@ -197,13 +214,13 @@ class Main {
                     }else return 50;
                 }else return 10;
             }else return 5;
-        }else return 0;
+        }else return 1;
     }
 
     // ini buat convert subtractive ke addictive
-    public static String ConvertToAddictive(String Alp)
+    public static String ConvertToAddictive(String data)
     {
-        String CurrentText = Alp;
+        String CurrentText = data;
 
         if(CurrentText.contains("CM"))
         {
@@ -239,10 +256,10 @@ class Main {
     }
 
     // ini buat sorting sesudah besaran data
-    public static String SortComparator(String current)
+    public static String SortComparator(String currentData)
     {
         char arrayComparator[]  = {'M','D','C','L','X','V','I'};
-        char tempArray[] = current.toCharArray();
+        char tempArray[] = currentData.toCharArray();
 
         String tempHasil = "";
 
