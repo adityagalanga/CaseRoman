@@ -1,6 +1,7 @@
 
 import java.util.Scanner;
 
+
 class Main {
 
     // buat simpen data hasil simplify
@@ -147,48 +148,50 @@ class Main {
 
         return 0;
     }
-    
+
     // ini buat calculate simplify number
     public static String CalculateNumberRoman(String curData, int score,int length)
     {
-        //normalize length yang habis dibagi 5
-        int normalizeNum = length >=5 ? length % 5 : 0;
-        int currentLength = length - normalizeNum;
-        String moreResult = "";
-        if(normalizeNum != 0)
+        // ini hitung kemampuan sampai mana simplify berjalan
+        int MaxScore=0;
+        int SelectedRange=0;
+        for(int x=0;x<curData.length();x++)
         {
-            //ambil sisanya yang gabakal dihitung
-            moreResult = curData.substring(length-normalizeNum,length);
-        }
-        // ini buat check number simplify
-        int currentDataScore = CheckNumberSimplify(score,currentLength);
+            int currentDataScore = CheckNumberSimplify(score,x+1);
 
-        if(currentDataScore == score)
+            //kalau misalnya lebih berarti naikin kemampuan simplyfi
+            if(currentDataScore >= MaxScore)
+            {
+                MaxScore = currentDataScore;
+                SelectedRange = x+1;
+            }
+        }
+        if(MaxScore == score && SelectedRange == length)
         {
-            // kalau misalnya hasilnya sama setelah di simplify berarti tinggal balikin lagi yg awal
             return curData;
         }
-        //masukin sisanya ke hasil hitungan
-        HasilHitungan = moreResult + HasilHitungan;
-        if(currentDataScore == 1){
+        //masukin hasil sisa hitungan
+        HasilHitungan = curData.substring(SelectedRange, length) + HasilHitungan;
+
+        if(MaxScore == 1){
             return "I";
         }
-        if(currentDataScore == 5){
+        if(MaxScore == 5){
             return "V";
         }
-        if(currentDataScore == 10){
+        if(MaxScore == 10){
             return "X";
         }
-        if(currentDataScore == 50){
+        if(MaxScore == 50){
             return "L";
         }
-        if(currentDataScore == 100){
+        if(MaxScore == 100){
             return "C";
         }
-        if(currentDataScore == 500){
+        if(MaxScore == 500){
             return "D";
         }
-        if(currentDataScore == 1000){
+        if(MaxScore == 1000){
             return "M";
         }
         return curData;
