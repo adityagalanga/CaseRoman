@@ -1,12 +1,6 @@
 
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
-import jdk.internal.util.xml.impl.Input;
-
-import java.util.Arrays;
-
 class JokianTugas {
 
     public static void main(String[] args) {
